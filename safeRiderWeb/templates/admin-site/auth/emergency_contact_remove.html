@@ -1,0 +1,15 @@
+{% extends 'admin-site/auth/main.html' %}
+{% block content %}
+    <div class="w-100 row mt-1">
+        <form id="signup-form" class="card col-sm-12 col-md-7 m-auto" action="{% url 'admin-emergency-contact-rm-url' contact.id %}" method="post">
+            <div class="card-header">
+                <h4 class="text-info font-weight-bolder">Are you sure you want to <span>REMOVE</span> {{ contact.name.first_name }} {{ contact.name.last_name }} as one of the emergency contacts?</h4>
+            </div>
+            {% csrf_token %}
+            <div class="card-footer d-flex">
+                <a class="btn btn-primary w-50" href="{% url 'admin-stage-view-url' contact.name.stage_id %}">NO</a>
+                <button class="btn btn-danger w-50" type="submit" >YES</button>
+            </div>
+        </form>
+    </div>
+{% endblock %}

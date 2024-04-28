@@ -1,0 +1,73 @@
+{% extends 'admin-site/auth/main.html' %}
+{% block content %}
+
+    <div class="row dashboard">
+        <div class="col-md-6 col-sm-6 dashboard-right d-flex">
+            <div class="card w-100 h-75 mr-auto ml-auto mt-md-4 mt-sm-3">
+                <div class="card-header text-info">
+                    <h4>All Stages <sup class="text-danger">{{ stages.count }}</sup></h4>
+                </div>
+                <div class="card-body">
+                    <table class="table table-hover table-responsive-sm">
+                        <tbody>
+                        <tr class="text-capitalize">
+                            <td class="text-dark">STAGE NAME</td>
+                            <td>STAGE NUMBER</td>
+                            <td></td>
+                        </tr>
+                        {% for stage in stages %}
+                            <tr class="text-capitalize">
+                                <td class="text-dark">{{ stage.stage_name }}</td>
+                                <td>{{ stage.stage_number }}</td>
+                                <td>
+                                    <a class="btn btn-link w-100" href="{% url 'admin-stage-view-url' stage.id %}">View</a>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+                <div class="card-footer d-flex">
+                    <a class="btn btn-info w-50 m-auto text-capitalize" href="{% url 'admin-stage-add-url' %}">Add Stage</a>
+                    <a class="btn btn-info w-50 m-auto text-capitalize" href="{% url 'admin-stage-admin-add-url' %}">Add Stage Admin</a>
+                    
+                </div>
+            </div>
+        </div>
+
+
+
+        <div class="col-md-6 col-sm-6 dashboard-left d-flex">
+            <div class="card w-100 h-75 mr-auto ml-auto mt-md-4 mt-sm-1 ">
+                <div class="card-header text-info">
+                    <h4>All Registered Members <sup class="text-danger">{{ members.count }}</sup></h4>
+                </div>
+                <div class="card-body">
+                    <table class="table table-hover table-responsive-sm">
+                        <tbody>
+                        <tr class="text-uppercase text-info font-weight-bolder">
+                            <td>NAME</td>
+                            <td>MOTORBIKE NUMBER</td>
+                            <td>STAGE</td>
+                            <td></td>
+                        </tr>
+                        {% for member in members %}
+                            {% if member.id != request.user.id %}
+                                <tr class="text-capitalize">
+                                    <td>{{ member.first_name }} {{ member.second_name }} {{ member.last_name }}</td>
+                                    <td>{{ member.motorbike_reg_number }}</td>
+                                    <td>{{ member.stage.stage_name }}</td>
+                                    <td><a href="{% url 'admin-member-url' member.id %}">View</a></td>
+                                </tr>
+                            {% endif %}
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+                <div class="card-footer">
+                    <a class="btn btn-info w-100 text-capitalize" href="{% url 'admin-member-add-url' %}">Add Member</a>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

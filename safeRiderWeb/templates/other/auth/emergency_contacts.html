@@ -1,0 +1,35 @@
+{% extends 'other/main.html' %}
+{% block content %}
+    <div class="w-100 d-flex">
+        <div class="card w-100 h-75 mr-auto ml-auto mt-md-4 mt-sm-1 ">
+            <div class="card-header text-info">
+                <h4 class="text-info font-weight-bolder">Stage Emergency Contacts</h4>
+            </div>
+            <div class="card-body">
+                <table class="table table-hover table-responsive-sm">
+                    <tbody>
+                    <tr class="text-uppercase text-info font-weight-bolder">
+                        <td>NAME</td>
+                        <td>EMAIL</td>
+                        <td>PHONE</td>
+                        <td>MOTORBIKE NUMBER</td>
+                        <td></td>
+                    </tr>
+                    {% for contact in contacts %}
+                        <tr >
+                            <td class="text-uppercase">{{ contact.name.first_name }} {{ contact.name.second_name }} {{ contact.name.last_name }}</td>
+                            <td  class="text-uppercase">{{ contact.name.email }}</td>
+                            <td  class="text-uppercase">{{ contact.name.phone_number }}</td>
+                            <td class="text-uppercase">{{ contact.name.motorbike_reg_number }}</td>
+                            <td><a class="btn btn-danger" href="{% url 'emergency-contact-rm-url' contact.id %}">Remove</a></td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+            <div class="card-footer text-center">
+                <a class="btn btn-info w-50 text-capitalize" href="{% url 'emergency-contact-add-url' %}">Add</a>
+            </div>
+        </div>
+    </div>
+{% endblock %}

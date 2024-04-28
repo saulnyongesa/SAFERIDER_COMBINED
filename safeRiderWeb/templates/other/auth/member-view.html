@@ -1,0 +1,35 @@
+{% extends 'other/main.html' %}
+{% block content %}
+    <div class="d-flex w-100 h-100 pt-2">
+        <div class="card w-75 m-auto">
+            <div class="card-header text-info">
+                <h3 class="text-info font-weight-bolder">Stage Member View</h3>
+            </div>
+            <div class="card-body">
+                <table class="table table-hover table-responsive-sm">
+                    <tbody>
+                    <tr class="text-capitalize">
+                        <td class="text-dark">NAME</td>
+                        <td>{{ member.first_name }} {{ member.second_name }} {{ member.last_name }}</td>
+                    </tr>
+                    <tr class="text-capitalize">
+                        <td class="text-dark">GENDER</td>
+                        <td>{{ member.gender.gender_name }}</td>
+                    </tr>
+                    <tr class="text-capitalize">
+                        <td class="text-dark">EMAIL</td>
+                        <td>{{ member.email }}</td>
+                    </tr>
+                    <tr class="text-capitalize">
+                        <td class="text-dark">PHONE</td>
+                        <td>{{ member.phone_number }}</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="card-footer">
+                <a class="btn btn-info text-capitalize" href="{% url 'member-edit-url' member.id %}">Edit</a>
+            </div>
+        </div>
+    </div>
+{% endblock %}

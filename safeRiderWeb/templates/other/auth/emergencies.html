@@ -1,0 +1,45 @@
+{% extends 'other/main.html' %}
+{% block content %}
+    <div class="d-flex w-100 pt-2 overflow-auto" style="height: 80vh">
+        <div class="card w-75 m-auto " style="overflow-y: auto">
+            <div class="card-header text-info">
+                <h4>Emergencies</h4>
+            </div>
+            <div class="card-body">
+                <table class="table table-hover table-responsive-sm">
+                    <tbody>
+                    {% for emergency in emergencies %}
+                        <tr class="text-capitalize" style="border: 1px solid black">
+                            <td>
+                                <div>
+                                    <small class="text-info">{{ emergency.created }}</small>
+                                    {% if emergency.is_read %}
+                                        <p class="text-capitalize text-dark bg-light">{{ emergency.sender.first_name }} {{ emergency.sender.last_name }} a Member of your stage, {{ emergency.sender.stage.stage_name }}, has got an emergency. He needs your quick action.
+                                            <br>
+                                            Kindly Act as quick as possible. Click
+                                            <a class="btn btn-link" href="{% url 'emergency-view-url' emergency.id %}">View Details</a>
+                                            to See more information
+                                        </p>
+                                    {% else %}
+                                        <p class="text-capitalize text-light bg-dark">{{ emergency.sender.first_name }} {{ emergency.sender.last_name }} a Member of your stage, {{ emergency.sender.stage.stage_name }}, has got an emergency. He needs your quick action.
+                                            <br>
+                                            Kindly Act as quick as possible. Click
+                                            <a class="btn btn-link" href="{% url 'emergency-view-url' emergency.id %}">View Details</a>
+                                            to See more information. <a class="btn btn-info" href="{% url 'emergency-read-url' emergency.id %}">Mark as Read</a>
+                                        </p>
+                                    {% endif %}
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+
+                            </td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+{% endblock %}

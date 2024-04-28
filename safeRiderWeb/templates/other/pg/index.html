@@ -1,0 +1,72 @@
+{% extends 'other/main.html' %}
+{% block content %}
+
+    <div class="row dashboard">
+        <div class="col-md-6 col-sm-6 dashboard-right d-flex">
+            <div class="card w-100 h-75 mr-auto ml-auto mt-md-4 mt-sm-3">
+                <div class="card-header text-info">
+                    <h4>My Stage</h4>
+                </div>
+                <div class="card-body">
+                    <table class="table table-hover table-responsive-sm">
+                        <tbody>
+                        <tr class="text-capitalize">
+                            <td class="text-dark">STAGE NAME</td>
+                            <td>{{ stage.stage_name }}</td>
+                        </tr>
+                        <tr class="text-capitalize">
+                            <td class="text-dark">STAGE NUMBER</td>
+                            <td>{{ stage.stage_number }}</td>
+                        </tr>
+                        <tr class="text-capitalize">
+                            <td class="text-dark">STAGE LOCATION</td>
+                            <td>{{ stage.location }}</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="card-footer">
+                    <a class="btn btn-info w-100 text-capitalize" href="{% url 'stage-edit-url' %}">Edit</a>
+                </div>
+            </div>
+        </div>
+
+
+
+        <div class="col-md-6 col-sm-6 dashboard-left d-flex">
+            <div class="card w-100 h-75 mr-auto ml-auto mt-md-4 mt-sm-1 ">
+                <div class="card-header text-info">
+                    <h3>Stage Members <sup class="text-danger">{{ members.count }}</sup></h3>
+                </div>
+                <div class="card-body">
+                    <table class="table table-hover table-responsive-sm">
+                        <tbody>
+                        <tr class="text-uppercase text-info font-weight-bolder">
+                            <td>Name</td>
+                            <td>Motorbike Number</td>
+                            <td></td>
+                        </tr>
+                        <tr class="text-capitalize text-success">
+                            <td>{{ request.user.first_name }} {{ request.user.second_name }} {{ request.user.last_name }}</td>
+                            <td>{{ request.user.motorbike_reg_number }}</td>
+                            <td><a href="{% url 'member-url' request.user.id %}">My Profile</a></td>
+                        </tr>
+                        {% for member in members %}
+                            {% if member.id != request.user.id %}
+                                <tr class="text-capitalize">
+                                    <td>{{ member.first_name }} {{ member.second_name }} {{ member.last_name }}</td>
+                                    <td>{{ member.motorbike_reg_number }}</td>
+                                    <td><a href="{% url 'member-url' member.id %}">View More</a></td>
+                                </tr>
+                            {% endif %}
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+                <div class="card-footer">
+                    <a class="btn btn-info w-100 text-capitalize" href="{% url 'member-add-url' %}">Add Member</a>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

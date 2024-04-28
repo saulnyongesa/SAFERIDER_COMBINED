@@ -1,0 +1,24 @@
+<resources>
+    <string name="app_name">Safe Rider</string>
+    <string name="password">Password</string>
+    <string name="login">Login</string>
+    <string name="username">Username</string>
+    <string name="name">name</string>
+    <string name="emergency_btn_text">Emergency Button</string>
+    <string name="online_payment_text">Online Payment</string>
+    <string name="phone_hint">Phone number</string>
+    <string name="amount_hint">Amount</string>
+    <string name="pay_btn_text">Pay</string>
+    <string name="pay">Pay</string>
+    <string name="my_profile">My profile</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="phone_number">Phone number</string>
+    <string name="amount">Amount</string>
+    <string name="fare_payment">FARE PAYMENT</string>
+    <string name="ok">OK</string>
+    <string name="log_out">Log out</string>
+    <string name="my_current_customer">MY CURRENT CUSTOMER</string>
+
+
+</resources>

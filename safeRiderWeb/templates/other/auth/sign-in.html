@@ -1,0 +1,29 @@
+{% extends 'other/main.html' %}
+{% block content %}
+    <div class="w-100 row pt-2">
+        <form class="card col-sm-12 col-md-5 m-auto" action="{% url 'sign-in-url' %}" method="post">
+            <div class="card-header text-center">
+                <h4 class="text-info font-weight-bolder">Stage Admin Sign In</h4>
+            </div>
+
+            <div class="card-body d-block">
+                {% csrf_token %}
+                <label for="username">
+                    Username:
+                    <br>
+                    <input type="text" id="username" name="username" placeholder="Phone">
+                </label><br>
+                <label for="password">
+                    Password:
+                    <br>
+                    <input type="password" id="password" name="password">
+                </label>
+            </div>
+
+            <div class="card-footer text-center">
+                <button class="btn btn-success w-50" type="submit" value="Login">Login</button>
+                <h6>You don't have an account? <a class="btn btn-link" href="{% url 'sign-up-url'%}">Sign up</a></h6>
+            </div>
+        </form>
+    </div>
+{% endblock %}

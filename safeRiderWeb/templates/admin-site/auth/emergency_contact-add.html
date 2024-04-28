@@ -1,0 +1,34 @@
+{% extends 'admin-site/auth/main.html' %}
+{% block content %}
+    <div class="row w-100">
+        <form id="signup-form" class="card col-sm-12 col-md-7 m-auto" action="{% url 'admin-emergency-contact-add-url' stage.id %}" method="post">
+            <div class="card-header">
+                <h4 class="text-info font-weight-bolder">Add Emergency Contact To ({{ stage.stage_name }})</h4>
+            </div>
+
+            <div class="card-body d-block">
+                {% csrf_token %}
+
+                <div class="row">
+                    <label for="member" class="col-md-12 col-lg-12 col-sm-12">
+                        Choose A Member*
+                        <br>
+                        <select id="member" name="member" required>
+                            <option value="">Choose...</option>
+                            {% for member in members %}
+                                {% if not member.is_emergency_contact and member.stage_id == stage.id %}
+                                    <option class="text-capitalize" value="{{ member.id }}">{{ member.first_name }} {{ member.last_name }}, ID: {{ member.id_number }}</option>
+                                {% endif %}
+                            {% endfor %}
+                        </select>
+                    </label>
+                </div>
+            </div>
+
+            <div class="card-footer d-flex">
+                <a class="btn btn-primary w-25 m-auto" href="{% url 'admin-stage-view-url' stage.id %}">Back</a>
+                <button class="btn btn-success w-25 m-auto" type="submit">Submit</button>
+            </div>
+        </form>
+    </div>
+{% endblock %}

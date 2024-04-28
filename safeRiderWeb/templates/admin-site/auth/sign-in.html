@@ -1,0 +1,28 @@
+{% extends 'admin-site/auth/main.html' %}
+{% block content %}
+    <div class="w-100 row">
+        <form class="card col-sm-12 col-md-5 m-auto" action="{% url 'admin-sign-in-url' %}" method="post">
+            <div class="card-header text-center">
+                <h4 class="text-info font-weight-bolder">Admin Sign In</h4>
+            </div>
+
+            <div class="card-body d-block">
+                {% csrf_token %}
+                <label for="username">
+                    Username*
+                    <br>
+                    <input type="text" id="username" name="username" placeholder="Phone">
+                </label><br>
+                <label for="password">
+                    Password*
+                    <br>
+                    <input type="password" id="password" name="password">
+                </label>
+            </div>
+
+            <div class="card-footer text-center">
+                <button type="submit" class="btn btn-success w-50">Login</button>
+            </div>
+        </form>
+    </div>
+{% endblock %}

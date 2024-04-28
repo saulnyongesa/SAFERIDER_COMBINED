@@ -1,0 +1,77 @@
+{% extends 'admin-site/auth/main.html' %}
+{% block content %}
+    <div class="row w-100">
+        <form id="signup-form" class="card col-sm-12 col-md-7 m-auto" action="{% url 'member-add-url' %}" method="post">
+            <div class="card-header">
+                <h4 class="text-info font-weight-bolder">Add Member To ({{ stage.stage_name }})</h4>
+            </div>
+
+            <div class="card-body d-block">
+                {% csrf_token %}
+                <div class="row">
+                    <label for="firstname" class="col-md-4 col-lg-4 col-sm-12">
+                        First name*
+                        <br>
+                        <input type="text" id="firstname" name="firstname" required>
+                    </label>
+                    <label for="second-name" class="col-md-4 col-lg-4 col-sm-12">
+                        Second name*
+                        <br>
+                        <input type="text" id="second-name" name="second_name">
+                    </label>
+                    <label for="lastname" class="col-md-4 col-lg-4 col-sm-12">
+                        Last name*
+                        <br>
+                        <input type="text" id="lastname" name="lastname" required>
+                    </label>
+                </div>
+
+                <div class="row">
+                    <label for="phone" class="col-md-4 col-lg-4 col-sm-12">
+                        Phone Number*
+                        <br>
+                        <input type="text" id="phone" name="phone">
+                    </label>
+                    <label for="id" class="col-md-4 col-lg-4 col-sm-12">
+                        ID*
+                        <br>
+                        <input type="number" id="id" name="id">
+                    </label>
+                    <label for="email" class="col-md-4 col-lg-4 col-sm-12">
+                        Email*
+                        <br>
+                        <input type="email" id="email" name="email" required>
+                    </label>
+                </div>
+                <div class="row">
+                    <label for="gender" class="col-md-6 col-lg-6 col-sm-12">
+                        Gender*
+                        <br>
+                        <select id="gender" name="gender" required>
+                            <option value="">Choose...</option>
+                            {% for gender in genders %}
+                                <option class="text-capitalize" value="{{ gender.id }}">{{ gender.gender_name }}</option>
+                            {% endfor %}
+                        </select>
+                    </label>
+                    <label for="bike_number" class="col-md-6 col-lg-6 col-sm-12">
+                        Motorbike number*
+                        <br>
+                        <input type="text" id="bike_number" name="bike_number" required>
+                    </label>
+                </div>
+            
+                <div class="row">
+                     <label for="is_admin" class="col-md-3 col-sm-12">
+                        Mark Admin* <input class="bg-danger" type="checkbox" id="is_admin" name="is_admin" required>
+                    </label>
+                </div>
+            </div>
+
+            <div class="card-footer d-flex">
+                <a class="btn btn-success w-50 m-auto" href="{% url 'admin-stage-view-url' stage.id %}">Cancel</a>
+                <input class="btn btn-success w-50 m-auto" type="submit" value="Submit">
+            </div>
+        </form>
+    </div>
+{% endblock %}

@@ -1,0 +1,21 @@
+{% extends 'admin-site/auth/main.html' %}
+{% load crispy_forms_filters %}
+{% block content %}
+    <div class="row w-100">
+        <form id="signup-form" class="card col-sm-12 col-md-7 m-auto" action="{% url 'admin-site-sign-up-url' %}" method="post">
+            <div class="card-header text-center">
+                <h4 class="text-info font-weight-bolder">Staff Registration</h4>
+            </div>
+
+            <div class="card-body d-block">
+                {% csrf_token %}
+                {{ form|crispy }}
+            </div>
+
+            <div class="card-footer text-center">
+                <button class="btn btn-success w-50" type="submit">Submit</button>
+                <h6>You have an account? <a class="btn btn-link" href="{% url 'admin-sign-in-url'%}">Sign in</a></h6>
+            </div>
+        </form>
+    </div>
+{% endblock %}

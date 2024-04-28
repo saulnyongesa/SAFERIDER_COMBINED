@@ -1,0 +1,94 @@
+{% extends 'admin-site/auth/main.html' %}
+{% block content %}
+    <div class="d-block w-100 pt-2">
+        <div class="card w-75 m-auto pt-2">
+            <div class="card-header">
+                <h4 class="text-info font-weight-bolder">Stage Details ({{ stage.stage_name }}) </h4>
+            </div>
+            <div class="card-body">
+                <table class="table table-hover table-responsive-sm">
+                    <tbody>
+                    <tr class="text-capitalize">
+                        <td class="text-dark">STAGE NAME:</td>
+                        <td>{{ stage.stage_name }}</td>
+                    </tr>
+                    <tr class="text-capitalize">
+                        <td class="text-dark">STAGE NUMBER:</td>
+                        <td>{{ stage.stage_number }}</td>
+                    </tr>
+                    <tr class="text-capitalize">
+                        <td class="text-dark">STAGE ADMIN:</td>
+                        {% for member in members %}
+                            {% if member.is_admin %}
+                                <td>{{ member.first_name}} {{ member.second_name}} {{ member.last_name}}</td>
+                            {% endif %}
+                        {% endfor %}
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="card-footer">
+                <a class="btn btn-info text-capitalize" href="{% url 'admin-stage-edit-url' stage.id %}">Edit</a>
+            </div>
+        </div>
+
+        <div class="card w-75 m-auto pt-2">
+            <div class="card-header">
+                <h4 class="text-info font-weight-bolder">Stage Emergency Contacts</h4>
+            </div>
+            <div class="card-body">
+                <table class="table table-hover table-responsive-sm">
+                    <tbody>
+                    <tr class="text-capitalize">
+                        <td class="text-dark">NAME</td>
+                        <td class="text-dark">EMAIL</td>
+                        <td class="text-dark">PHONE</td>
+                        <td></td>
+                    </tr>
+                    {% for contact in contacts %}
+                        <tr >
+                            <td class="text-uppercase">{{ contact.name.first_name }} {{ contact.name.second_name }} {{ contact.name.last_name }}</td>
+                            <td  class="text-uppercase">{{ contact.name.email }}</td>
+                            <td  class="text-uppercase">{{ contact.name.phone_number }}</td>
+                            <td class="text-uppercase">{{ contact.name.motorbike_reg_number }}</td>
+                            <td><a class="btn btn-danger" href="{% url 'admin-emergency-contact-rm-url' contact.id %}">Remove</a></td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+            <div class="card-footer">
+                <a class="btn btn-info text-capitalize" href="{% url 'admin-emergency-contact-add-url' stage.id %}">Add</a>
+            </div>
+
+        </div>
+
+        <div class="card w-75 m-auto pt-2">
+            <div class="card-header">
+                <h4 class="text-info font-weight-bolder">Stage Members <sup class="text-danger">{{ members.count }}</sup></h4>
+            </div>
+            <div class="card-body">
+                <table class="table table-hover table-responsive-sm">
+                    <tbody>
+                    <tr class="text-uppercase text-info font-weight-bolder">
+                        <td>NAME</td>
+                        <td>MOTORBIKE NUMBER</td>
+                        <td>STAGE</td>
+                    </tr>
+                    {% for member in members %}
+                        <tr class="text-capitalize">
+                            <td>{{ member.first_name }} {{ member.second_name }} {{ member.last_name }}</td>
+                            <td>{{ member.motorbike_reg_number }}</td>
+                            <td>{{ member.stage.stage_name }}</td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+            <div class="card-footer">
+                <a class="btn btn-info text-capitalize" href="{% url 'admin-stage-member-add-url' stage.id %}">Add</a>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

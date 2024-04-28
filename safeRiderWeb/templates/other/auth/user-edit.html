@@ -1,0 +1,23 @@
+{% extends 'other/main.html' %}
+{% load crispy_forms_filters %}
+{% block content %}
+    <div class="d-flex justify-content-center w-100 h-100 row pt-2">
+        <div class="col-md-6 col-sm-12 m-auto row">
+            <form id="signup-form" class="card w-100" action="{% url 'user-edit-url' %}" method="post">
+                <div class="card-header">
+                    <h4 class="text-info font-weight-bolder">Profile Edit</h4>
+                </div>
+
+                <div class="card-body d-block">
+                    {% csrf_token %}
+                    {{ form|crispy }}
+                </div>
+
+                <div class="card-footer d-flex">
+                    <a class="btn btn-primary w-25 m-auto" href="{% url 'profile-url' %}">Back</a>
+                    <button class="btn btn-success w-25 m-auto" type="submit">Save</button>
+                </div>
+            </form>
+        </div>
+    </div>
+{% endblock %}

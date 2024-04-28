@@ -1,0 +1,94 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Safe Rider</title>
+
+    <link rel="stylesheet" href="{% static 'css/bootstrap/css/bootstrap.css' %}">
+    <link rel="stylesheet" href="{% static 'css/main.css' %}">
+    <script src="https://api.mapbox.com/mapbox-gl-js/v2.6.1/mapbox-gl.js"></script>
+    <link href="https://api.mapbox.com/mapbox-gl-js/v2.6.1/mapbox-gl.css" rel="stylesheet">
+    <style>
+        #map {
+            width: 100%;
+            height: 400px;
+        }
+    </style>
+</head>
+<body class="bg-light">
+<nav class="navbar navbar-expand-md navbar-dark bg-dark">
+    <a class="navbar-brand" href="{% url 'dashboard-url' %}">
+        <img src="../../static/media/logo/logo.jpg" alt="logo" style="width: 50px; height: 50px; border-radius: 50%">
+        Safe
+        <span class="text-success text-sm-right">Rider</span>
+        <h6 class="text-info">Stage Admin</h6>
+    </a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="collapsibleNavbar">
+        <ul class="navbar-nav d-md-flex">
+            {% if request.user.is_authenticated %}
+                <li class="nav-item m-md-auto">
+                    <a class="nav-link" href="{% url 'dashboard-url' %}">Home</a>
+                </li>
+                <li class="nav-item m-md-auto">
+                    <a class="nav-link" href="{% url 'emergency-contacts-url' %}">Emergency Contacts</a>
+                </li>
+                <li class="nav-item m-md-auto">
+                    <a class="nav-link" href="{% url 'emergencies-url' %}">Emergencies <sup class="text-danger">{{ emergency_count.count }}</sup></a>
+                </li>
+                <li class="nav-item dropdown m-md-auto">
+                    <a class="dropdown-toggle btn btn-link text-light" role="button" data-toggle="dropdown" aria-expanded="false">
+                        {{ request.user.username }}
+                    </a>
+                    <div class="dropdown-menu">
+                        <a class="dropdown-item text-dark" href="{% url 'profile-url' %}">My Profile</a>
+                        <a class="dropdown-item text-danger" href="{% url 'sign-out-url' %}">Sign out</a>
+                    </div>
+                </li>
+            {% else %}
+                <li class="nav-item ">
+                    <a class="nav-link btn btn-link" href="{% url 'sign-in-url' %}">SIGN IN</a>
+                </li>
+            {% endif %}
+        </ul>
+    </div>
+</nav>
+
+<div class="container-fluid main-content bg-light">
+    {% for message in messages %}
+        <p class="alert alert-dismissible alert-info text-center m-auto" style="width: 90%; margin-bottom: 10px">
+            <button type="button" class="close" data-dismiss="alert">&times;</button>
+            <strong  {% if message.tags %} class="{{ message.tags }} text-capitalize"{% endif %}>
+                {{ message }}
+            </strong>
+        </p>
+    {% endfor %}
+
+    <div class="overlay" id="overlay"></div>
+    <div class="dialog-box" id="dialog-box">
+        <p id="dialog-message"></p>
+        <button onclick="closeDialog()">Close</button>
+    </div>
+    {% block content %}
+
+    {% endblock %}
+</div>
+
+<div class="footer container-fluid bg-dark">
+    <div class="h-100">
+        <h5 class="text-center text-info w-100">Powered by SSS LTD</h5>
+        <h6 class="text-center text-info w-100">Email: saulsoftwaresservices@gmail.com, Whatsapp/Call: +254708560861</h6>
+    </div>
+</div>
+
+<script src="{% static 'js/main.js' %}"></script>
+<script src="{% static 'css/bootstrap/js/jquery-3.4.0.js' %}"></script>
+<script src="{% static 'css/bootstrap/js/popper.min.js' %}"></script>
+<script src="{% static 'css/bootstrap/js/bootstrap.js' %}"></script>
+</body>
+</html>

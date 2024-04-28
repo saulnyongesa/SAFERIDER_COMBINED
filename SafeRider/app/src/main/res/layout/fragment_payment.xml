@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".PaymentFragment"
+    android:background="@drawable/bg1"
+    >
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_gravity="center_horizontal"
+        android:padding="1dp">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="@string/fare_payment"
+            android:background="@color/black"
+            android:gravity="center"
+            android:textSize="30sp"
+            android:textColor="@color/white"/>
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:id="@+id/phone"
+            android:background="@drawable/custom_edittext"
+            android:drawablePadding="8dp"
+            android:hint="@string/phone_number"
+            android:drawableStart="@drawable/baseline_phone_24"
+            android:padding="8dp"
+            android:textColor="@color/black"
+            android:backgroundTint="@color/white"
+            android:textColorHighlight="@color/cardview_dark_background"
+            android:layout_marginTop="40dp"
+            android:autofillHints="username"
+            android:inputType="phone" />
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:id="@+id/amount"
+            android:backgroundTint="@color/white"
+            android:background="@drawable/custom_edittext"
+            android:drawableStart="@drawable/baseline_attach_money_24"
+            android:drawablePadding="8dp"
+            android:hint="@string/amount"
+            android:padding="8dp"
+            android:inputType="number"
+            android:textColor="@color/black"
+            android:textColorHighlight="@color/cardview_dark_background"
+            android:layout_marginTop="20dp"
+            android:autofillHints="number" />
+
+        <ProgressBar
+            android:id="@+id/progressBar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            android:layout_gravity="center"/>
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:id="@+id/payButton"
+            android:text="@string/ok"
+            android:textSize="18sp"
+            android:layout_marginTop="30dp"
+            />
+    </LinearLayout>
+
+
+</FrameLayout>

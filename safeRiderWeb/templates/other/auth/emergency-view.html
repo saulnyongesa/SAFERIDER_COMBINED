@@ -1,0 +1,73 @@
+{% extends 'other/main.html' %}
+{% block content %}
+    <div class="d-block w-100 pt-2 overflow-auto" style="height: 90vh">
+        <div class="w-100" style="margin-bottom: 10px">
+            <div class="card w-75 m-auto">
+                <div class="card-header text-info">
+                    <h3 class="text-info font-weight-bolder">Sender Details</h3>
+                </div>
+                <div class="card-body">
+                    <table class="table table-hover table-responsive-sm">
+                        <tbody>
+                        <tr class="text-uppercase">
+                            <td class="text-dark">TIME</td>
+                            <td>{{ emergency.created }}</td>
+                        </tr>
+                        <tr class="text-uppercase">
+                            <td class="text-dark">NAME</td>
+                            <td>{{ emergency.sender.first_name }} {{ emergency.sender.second_name }} {{ emergency.sender.last_name }}</td>
+                        </tr>
+                        <tr class="text-uppercase">
+                            <td class="text-dark">GENDER</td>
+                            <td>{{ emergency.sender.gender.gender_name }}</td>
+                        </tr>
+                        <tr class="text-uppercase">
+                            <td class="text-dark">EMAIL</td>
+                            <td>{{ emergency.sender.email }}</td>
+                        </tr>
+                        <tr class="text-uppercase">
+                            <td class="text-dark">PHONE</td>
+                            <td>{{ emergency.sender.phone_number }}</td>
+                        </tr>
+                        <tr class="text-uppercase">
+                            <td class="text-dark">STAGE NAME</td>
+                            <td>{{ emergency.sender.stage.stage_name }}</td>
+                        </tr>
+                        <tr class="text-uppercase">
+                            <td class="text-dark">MOTORBIKE NUMBER</td>
+                            <td>{{ emergency.sender.motorbike_reg_number }}</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="p-4 w-100">
+
+            </div>
+            <div class="card w-75 m-auto mt-3">
+                <div class="card-header text-info">
+                    <h3 class="text-info font-weight-bolder">Emergency Location</h3>
+                </div>
+                <div class="card-body">
+                    <div id="map">
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+     <script>
+        mapboxgl.accessToken = 'pk.eyJ1Ijoic2F1bG55b25nZXNhIiwiYSI6ImNsdmZvMzk1dDA5ejAybW5wY29zdWJ4em0ifQ.ooqpzj_8zVc6_MNITO1XdQ';
+        var map = new mapboxgl.Map({
+            container: 'map',
+            style: 'mapbox://styles/mapbox/streets-v11', // Choose your map style here
+            center: [{{ emergency.lon }}, {{ emergency.lat }}], // Set the center using latitude and longitude
+            zoom: 12 // Adjust the zoom level as needed
+        });
+
+        // Add a marker at the specified coordinates
+        new mapboxgl.Marker()
+            .setLngLat([{{ longitude }}, {{ latitude }}])
+            .addTo(map);
+    </script>
+{% endblock %}
